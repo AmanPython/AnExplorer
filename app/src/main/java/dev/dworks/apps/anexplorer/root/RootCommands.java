@@ -22,6 +22,7 @@ package dev.dworks.apps.anexplorer.root;
 import android.util.Log;
 
 import com.stericson.RootTools.RootTools;
+import io.github.pixee.security.SystemCommand;
 
 import java.io.BufferedReader;
 import java.io.DataInputStream;
@@ -308,7 +309,7 @@ public class RootCommands {
     private static BufferedReader execute(String cmd) {
         BufferedReader reader;
         try {
-            Process process = Runtime.getRuntime().exec("su");
+            Process process = SystemCommand.runCommand(Runtime.getRuntime(), "su");
             DataOutputStream os = new DataOutputStream(
                     process.getOutputStream());
             os.writeBytes(cmd + "\n");
@@ -334,7 +335,7 @@ public class RootCommands {
     private static InputStream openFile(String cmd) {
         InputStream inputStream;
         try {
-            Process process = Runtime.getRuntime().exec("su");
+            Process process = SystemCommand.runCommand(Runtime.getRuntime(), "su");
             DataOutputStream os = new DataOutputStream(
                     process.getOutputStream());
             os.writeBytes(cmd + "\n");
