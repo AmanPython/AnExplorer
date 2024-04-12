@@ -477,7 +477,7 @@ public class AppsProvider extends DocumentsProvider {
 		try {
 			int start = packageName.lastIndexOf('.');
 			name = start != -1 ? packageName.substring(start+1) : packageName;
-			if(name.equalsIgnoreCase("android")){
+			if("android".equalsIgnoreCase(name)){
 				start = packageName.substring(0, start).lastIndexOf('.');
 				name = start != -1 ? packageName.substring(start+1) : packageName;
 			}	

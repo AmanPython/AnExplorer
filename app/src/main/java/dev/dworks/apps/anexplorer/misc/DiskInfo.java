@@ -56,7 +56,7 @@ public class DiskInfo {
         if (TextUtils.isEmpty(label)) {
             return false;
         }
-        if (label.equalsIgnoreCase("ata")) {
+        if ("ata".equalsIgnoreCase(label)) {
             return false;
         }
         if (label.toLowerCase().contains("generic")) {

@@ -21,7 +21,7 @@ public class NetworkFile{
 	public NetworkFile(String path, String host) {
 		this.path = fixSlashes(path);
 		this.host = host;
-		if(path.equals(separator)){
+		if(separator.equals(path)){
 			setRoot(true);
 		}
 	}
