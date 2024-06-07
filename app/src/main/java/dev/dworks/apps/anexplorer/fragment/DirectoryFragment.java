@@ -482,7 +482,9 @@ public class DirectoryFragment extends ListFragment {
 				&& mLastShowHiddenFiles == state.showHiddenFiles
                 && (mLastShowColor != 0 && mLastShowColor == mDefaultColor)
                 && (mLastShowAccentColor != 0 && mLastShowAccentColor == accentColor))
-			return;
+			{
+			    return;
+			}
         boolean refreshData = mLastShowHiddenFiles != state.showHiddenFiles;
 		mLastMode = state.derivedMode;
         mLastSortOrder = state.derivedSortOrder;
