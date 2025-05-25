@@ -22,6 +22,7 @@ package dev.dworks.apps.anexplorer.root;
 import android.util.Log;
 
 import com.stericson.RootTools.RootTools;
+import io.github.pixee.security.BoundedLineReader;
 
 import java.io.BufferedReader;
 import java.io.DataInputStream;
@@ -89,7 +90,7 @@ public class RootCommands {
             in = execute("ls -a " + getCommandLineString(path));
 
             String line;
-            while ((line = in.readLine()) != null) {
+            while ((line = BoundedLineReader.readLine(in, 5_000_000)) != null) {
                 if (!showhidden) {
                     if (line.charAt(0) != '.')
                         mDirContent.add(path + "/" + line);
@@ -125,7 +126,7 @@ public class RootCommands {
             in = execute("find " + getCommandLineString(path) + " -type f -iname " + '*' + getCommandLineString(query) + '*' + " -exec ls -a {} \\;");
 
             String line;
-            while ((line = in.readLine()) != null) {
+            while ((line = BoundedLineReader.readLine(in, 5_000_000)) != null) {
                 mDirContent.add(line);
             }
         } catch (IOException e) {
@@ -266,7 +267,7 @@ public class RootCommands {
                 BufferedReader br = new BufferedReader(new InputStreamReader(
                         dis));
                 String data;
-                while ((data = br.readLine()) != null) {
+                while ((data = BoundedLineReader.readLine(br, 5_000_000)) != null) {
                     procData.append(data).append("\n");
                 }
 
@@ -395,7 +396,7 @@ public class RootCommands {
             in = execute("ls -l "
                     + getCommandLineString(file.getAbsolutePath()));
 
-            while ((line = in.readLine()) != null) {
+            while ((line = BoundedLineReader.readLine(in, 5_000_000)) != null) {
                 info = getAttrs(line);
             }
             in.close();
