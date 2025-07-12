@@ -10,6 +10,8 @@ import android.provider.BaseColumns;
 import android.support.v4.util.ArrayMap;
 import android.text.TextUtils;
 import android.util.Log;
+import io.github.pixee.security.HostValidator;
+import io.github.pixee.security.Urls;
 
 import org.apache.commons.net.ftp.FTPFile;
 
@@ -184,7 +186,7 @@ public class NetworkStorageProvider extends DocumentsProvider {
                 return null;
             } else {
                 Uri ftpUri = connection.toUri(file);
-                URL url = new URL(ftpUri.toString());
+                URL url = Urls.create(ftpUri.toString(), Urls.HTTP_PROTOCOLS, HostValidator.DENY_COMMON_INFRASTRUCTURE_TARGETS);
                 URLConnection conn = url.openConnection();
                 InputStream inputStream = conn.getInputStream();
                 if(null != inputStream){
