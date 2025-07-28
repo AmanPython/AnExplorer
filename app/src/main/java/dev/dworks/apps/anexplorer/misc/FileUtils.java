@@ -11,6 +11,7 @@ import android.support.provider.DocumentFile;
 import android.text.TextUtils;
 import android.util.Log;
 import android.webkit.MimeTypeMap;
+import io.github.pixee.security.ZipSecurity;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
@@ -413,7 +414,7 @@ public class FileUtils {
         boolean success = false;
         try {
             FileInputStream fis = new FileInputStream(zipFile);
-            ZipInputStream zis = new ZipInputStream(new BufferedInputStream(fis));
+            ZipInputStream zis = ZipSecurity.createHardenedInputStream(new BufferedInputStream(fis));
             ZipEntry entry;
             File destFolder = new File(zipFile.getParent(), FileUtils.getNameFromFilename(zipFile.getName()));
             destFolder.mkdirs();
