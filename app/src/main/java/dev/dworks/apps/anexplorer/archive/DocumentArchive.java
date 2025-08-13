@@ -37,6 +37,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -208,8 +209,7 @@ public class DocumentArchive implements Closeable {
             // Create a copy of the archive, as ZipFile doesn't operate on streams.
             // Moreover, ZipInputStream would be inefficient for large files on
             // pipes.
-            snapshotFile = File.createTempFile("android.support.provider.snapshot{",
-                    "}.zip", context.getCacheDir());
+            snapshotFile = Files.createTempFile(context.getCacheDir().toPath(), "android.support.provider.snapshot{", "}.zip").toFile();
 
             try {
                 final FileOutputStream outputStream =
